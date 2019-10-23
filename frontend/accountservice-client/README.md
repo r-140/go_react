@@ -1,5 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 1. run npm install react-redux redux
+2. npm install prop-types --save
 
 ## Available Scripts
 
