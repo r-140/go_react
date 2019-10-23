@@ -27,7 +27,7 @@ func init() {
 func GetNewsById(w http.ResponseWriter, r *http.Request) {
 
 	// Read the 'newsId' path parameter from the mux map
-	var newsID = mux.Vars(r)["newsId"]
+	var newsID = mux.Vars(r)["newsID"]
 
 	// Read the news struct BoltDB
 	news, err := DBClient.QueryNews(newsID)

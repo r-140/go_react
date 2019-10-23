@@ -75,6 +75,8 @@ func (bc *BoltClient) QueryAllNews() ([]model.News, error) {
 // QueryNews ...
 func (bc *BoltClient) QueryNews(newsID string) (model.News, error) {
 	// Allocate an empty News instance we'll let json.Unmarhal populate for us in a bit.
+
+	fmt.Println("newsId ", newsID)
 	news := model.News{}
 
 	// Read an object from the bucket using boltDB.View
