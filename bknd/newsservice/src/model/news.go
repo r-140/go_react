@@ -2,7 +2,7 @@ package model
 
 type News struct {
 	Id     string `json:"id"`
-	Title  string `json:"name"`
+	Title  string `json:"title"`
 	Teaser string `json:"teaser"`
 	Body   string `json:"body"`
 }
