@@ -25,6 +25,7 @@ func init() {
 }
 
 func GetNewsById(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 
 	// Read the 'newsId' path parameter from the mux map
 	var newsID = mux.Vars(r)["newsID"]
@@ -46,6 +47,7 @@ func GetNewsById(w http.ResponseWriter, r *http.Request) {
 
 func GetAllnews(w http.ResponseWriter, r *http.Request) {
 
+	enableCors(&w)
 	// Read the news struct BoltDB
 	news, err := DBClient.QueryAllNews()
 
@@ -59,6 +61,10 @@ func GetAllnews(w http.ResponseWriter, r *http.Request) {
 	// If found, marshal into JSON, write headers and content
 	data, _ := json.Marshal(news)
 	writeJsonResponse(w, http.StatusOK, data)
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
 
 func writeJsonResponse(w http.ResponseWriter, status int, data []byte) {

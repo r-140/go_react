@@ -15,9 +15,13 @@ function newsReceived(news){
 }
 
 export function fetchNews(fakeNews){
+    console.log('presend')
     return dispatch => {
-        dispatch(newsReceived(fakeNews));
-    }
+        return fetch(`http://localhost:6768/news`)
+        .then( (response) =>{
+            console.log(response);
+        });
+    }    
 }
 
 export function fetchNewsItem(fakeNewsItem){
