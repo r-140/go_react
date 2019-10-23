@@ -1,29 +1,29 @@
 version: '3.6'
 services:
-    raccountservice-client:
-        container_name: accountservice-client
+    newsservice-client:
+        container_name: newsservice-client
         build:
-            context: frontend/accountservice-client # Use an image built from the specified dockerfile in the `documents-app-client` directory.
+            context: frontend/newsservice-client # Use an image built from the specified dockerfile in the `documents-app-client` directory.
             dockerfile: Dockerfile
-        image: accountservice-client:latest
+        image: newsservice-client:latest
         ports:
         - "9090:80" # Forward the exposed port 80 on the container to port 80 on the host machine
         networks:
         - nw_go
 
 
-    accountservice:
-        container_name: accountservice
+    newsservice:
+        container_name: newsservice
         build:
-            context: bknd/accountservice
+            context: bknd/newsservice
             dockerfile: Dockerfile
-        image: accountservice:latest
+        image: newsservice:latest
         expose:
             - 9008
         ports:
             - "9008:9008"
         networks:
-            - go
+            - nw_go
         logging:
             driver: json-file
 
@@ -49,20 +49,20 @@ services:
     #         - pgdoclogs:/var/log/postgresql
     #         - pgdocetc:/etc/postgresql
 
-    mongodb:
-        # image: mongo:latest
-        container_name: mongodb
-        build:
-           context: database/mongodb
-           dockerfile: Dockerfile
-        image: mongodb:latest
-        environment:
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
-#        volumes:
-          - mongo_data:/data/db
-        ports:
-            - 27017:27017
+#     mongodb:
+#         # image: mongo:latest
+#         container_name: mongodb
+#         build:
+#            context: database/mongodb
+#            dockerfile: Dockerfile
+#         image: mongodb:latest
+#         environment:
+#           - MONGO_DATA_DIR=/data/db
+#           - MONGO_LOG_DIR=/dev/null
+# #        volumes:
+#           - mongo_data:/data/db
+#         ports:
+#             - 27017:27017
         # command: mongod --smallfiles --logpath=/dev/null # --quiet
  
 
