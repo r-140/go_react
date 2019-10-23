@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 
 class NewsItemListing extends Component {
     render() {
+
+        console.log("NewsItemListing data", this.props.data)
         return (
+            
             <div>
+                
                 <div><Link to={`/news/${this.props.data.id}`}><b>{this.props.data.title}</b></Link></div>
                 <div>{this.props.data.teaser}</div>
             </div>

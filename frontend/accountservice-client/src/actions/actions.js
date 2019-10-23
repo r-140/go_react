@@ -14,18 +14,28 @@ function newsReceived(news){
     }
 }
 
-export function fetchNews(fakeNews){
-    console.log('presend')
+export function fetchNews(){
     return dispatch => {
-        return fetch(`http://localhost:6768/news`)
-        .then( (response) =>{
-            console.log(response);
-        });
+        return fetch(`/news`)
+        .then( (response) => response.json() )
+        .then( (data) => {
+            dispatch(newsReceived(data))
+        })
+        .catch( (e) => console.log(e) );
     }    
 }
 
-export function fetchNewsItem(fakeNewsItem){
+export function fetchNewsItem(id){
     return dispatch => {
-        dispatch(newsItemReceived(fakeNewsItem));
+        return fetch(`/news/${id}`)
+        .then( (response) => response.json() )
+        .then( (data) => dispatch(newsItemReceived(data.data)))
+        .catch( (e) => console.log(e) );
+    }    
+}
+
+function newsItemLoading(){
+    return {
+        type: actionTypes.NEWSITEM_LOADING
     }
 }

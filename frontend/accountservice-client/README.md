@@ -3,6 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 2. npm install prop-types --save
 3. npm install react-router-dom --save
 4. npm install redux react-redux redux-thunk --save
+5. add this to package.json "proxy": "http://localhost:6768",
 
 
 http://www.darrenbeck.co.uk/nodejs/react/reacttutorial-part2/
