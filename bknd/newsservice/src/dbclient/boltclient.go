@@ -11,19 +11,21 @@ import (
 	"github.com/boltdb/bolt"
 )
 
+// IBoltClient ...
 type IBoltClient interface {
 	OpenBoltDb()
-	QueryNews(newsId string) (model.News, error)
-	QueryAllNews()
+	QueryNews(newsID string) (model.News, error)
+	QueryAllNews() ([]model.News, error)
 	Seed()
-	Check()
+	Check() bool
 }
 
-// Real implementation
+//BoltClient  Real implementation
 type BoltClient struct {
 	boltDB *bolt.DB
 }
 
+// OpenBoltDb ...
 func (bc *BoltClient) OpenBoltDb() {
 	var err error
 	bc.boltDB, err = bolt.Open("accounts.db", 0600, nil)
@@ -32,8 +34,7 @@ func (bc *BoltClient) OpenBoltDb() {
 	}
 }
 
-// Naive healthcheck, just makes sure the DB connection has been initialized.
-
+// Check Naive healthcheck, just makes sure the DB connection has been initialized.
 func (bc *BoltClient) Check() bool {
 
 	return bc.boltDB != nil
