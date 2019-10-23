@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 class NewsItemListing extends Component {
     render() {
 
-        console.log("NewsItemListing data", this.props.data)
         return (
             
             <div>

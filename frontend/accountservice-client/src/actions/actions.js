@@ -29,7 +29,7 @@ export function fetchNewsItem(id){
     return dispatch => {
         return fetch(`/news/${id}`)
         .then( (response) => response.json() )
-        .then( (data) => dispatch(newsItemReceived(data.data)))
+        .then( (data) => dispatch(newsItemReceived(data)))
         .catch( (e) => console.log(e) );
     }    
 }
