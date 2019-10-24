@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"dbclient"
+	"model"
 
 	"github.com/gorilla/mux"
 )
@@ -43,6 +44,33 @@ func GetNewsById(w http.ResponseWriter, r *http.Request) {
 	// If found, marshal into JSON, write headers and content
 	data, _ := json.Marshal(news)
 	writeJsonResponse(w, http.StatusOK, data)
+}
+
+// CreateNews ...
+func CreateNews(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	decoder := json.NewDecoder(r.Body)
+	var news model.News
+	err := decoder.Decode(&news)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("CreateNews: news from body ", news)
+
+	result, error := DBClient.CreateNews(news)
+
+	if error != nil {
+		fmt.Println("Some error occured creating news " + error.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// If found, marshal into JSON, write headers and content
+	data, _ := json.Marshal(result)
+	writeJsonResponse(w, http.StatusCreated, data)
+
 }
 
 // GetAllnews ...

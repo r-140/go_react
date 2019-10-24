@@ -12,7 +12,7 @@ var appName = "newsservice"
 func main() {
 	fmt.Printf("Starting %v\n", appName)
 	initializeMongoClient()
-	service.StartWebServer("6768")
+	service.StartWebServer("6767")
 }
 
 func initializeMongoClient() {

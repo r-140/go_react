@@ -29,4 +29,10 @@ var routes = Routes{
 		"/news",
 		GetAllnews,
 	},
+	Route{
+		"CreateNews",
+		"POST",
+		"/news",
+		CreateNews,
+	},
 }

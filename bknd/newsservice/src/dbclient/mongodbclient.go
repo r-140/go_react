@@ -104,15 +104,42 @@ func (mc *MongoClient) QueryNews(newsID string) (model.News, error) {
 	return result, err
 }
 
-// Start seeding news
+// CreateNews ...
+func (mc *MongoClient) CreateNews(news model.News) (string, error) {
+
+	fmt.Println("news ", news)
+
+	// TODO: add validation structure
+	result, err := mc.addNews(&news)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Created a single document: %+v\n", result)
+
+	return result, err
+}
+
+// Seed Start seeding news
 func (mc *MongoClient) Seed() {
 	mc.seedNews()
 }
 
+func (mc *MongoClient) addNews(news *model.News) (string, error) {
+	collection := mc.client.Database("newsDb").Collection("news")
+
+	insertResult, err := collection.InsertOne(context.TODO(), news)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Inserted a Single Document: ", insertResult.InsertedID.(primitive.ObjectID).Hex())
+
+	return insertResult.InsertedID.(primitive.ObjectID).Hex(), err
+
+}
+
 // Seed (n) make-believe account objects into the NewsBucket bucket.
 func (mc *MongoClient) seedNews() {
-
-	collection := mc.client.Database("newsDb").Collection("news")
 
 	total := 10
 	for i := 0; i < total; i++ {
@@ -127,12 +154,12 @@ func (mc *MongoClient) seedNews() {
 			Body:   "This is body of nachrichte_" + strconv.Itoa(i),
 		}
 
-		insertResult, err := collection.InsertOne(context.TODO(), news)
+		result, err := mc.addNews(&news)
 		if err != nil {
-			log.Fatal(err)
+			panic(err)
 		}
-		fmt.Println("Inserted a Single Document: ", insertResult.InsertedID)
 
+		fmt.Println("created sib=ngle doc =", result)
 	}
 	fmt.Printf("Seeded %v fake news...\n", total)
 }
