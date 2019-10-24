@@ -19,9 +19,9 @@ services:
             dockerfile: Dockerfile
         image: newsservice:latest
         expose:
-            - 9008
+            - 6768
         ports:
-            - "9008:9008"
+            - "6768:6768"
         networks:
             - nw_go
         logging:
