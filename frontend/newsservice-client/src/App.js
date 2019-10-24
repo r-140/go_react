@@ -6,6 +6,7 @@ import About from './components/layouts/About';
 import Layout from './components/layouts/Layout';
 import NewsItemDetail from './components/presentation/NewsItemDetail';
 import NewsArticle from './components/containers/NewsArticle';
+import NewsSubmit from './components/containers/NewsSubmit';
 
 import { Provider } from 'react-redux';
 import store from './stores/store';
@@ -19,7 +20,8 @@ class App extends Component {
                 <Layout>
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
-                    <Route path='/news/:id' component={NewsArticle}/>    
+                    <Route path='/news/:id' component={NewsArticle}/>  
+                    <Route path='/submit' component={NewsSubmit}/>  
                 </Layout>
             </BrowserRouter>
         </Provider> 
