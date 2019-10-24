@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var DBClient dbclient.IBoltClient
+var DBClient dbclient.IDbClient
 
 var isHealthy = true
 
@@ -45,6 +45,7 @@ func GetNewsById(w http.ResponseWriter, r *http.Request) {
 	writeJsonResponse(w, http.StatusOK, data)
 }
 
+// GetAllnews ...
 func GetAllnews(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)

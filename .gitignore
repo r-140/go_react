@@ -43,5 +43,6 @@ yarn-error.log*
 /vendor
 /gitlab.com
 /github.com
+/go.mongodb.org
 Gopkg.lock
 Gopkg.toml

@@ -49,21 +49,21 @@ services:
     #         - pgdoclogs:/var/log/postgresql
     #         - pgdocetc:/etc/postgresql
 
-#     mongodb:
-#         # image: mongo:latest
-#         container_name: mongodb
-#         build:
-#            context: database/mongodb
-#            dockerfile: Dockerfile
-#         image: mongodb:latest
-#         environment:
-#           - MONGO_DATA_DIR=/data/db
-#           - MONGO_LOG_DIR=/dev/null
-# #        volumes:
-#           - mongo_data:/data/db
-#         ports:
-#             - 27017:27017
-        # command: mongod --smallfiles --logpath=/dev/null # --quiet
+    mongodb:
+        # image: mongo:latest
+        container_name: mongodb
+        build:
+           context: database/mongodb
+           dockerfile: Dockerfile
+        image: mongodb:latest
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+#        volumes:
+        #   - mongo_data:/data/db
+        ports:
+            - 27017:27017
+        command: mongod --smallfiles --logpath=/dev/null # --quiet
  
 
 volumes:

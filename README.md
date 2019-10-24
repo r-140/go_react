@@ -16,3 +16,5 @@ docker rmi $(docker images -q)
 
 all env variables must be defined in .env files
 Every variable must starts with the prefix REACT_APP_, otherwise, this variable wil be ignored by React
+
+to install mongo
