@@ -13,3 +13,6 @@ to build backend run
 
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
+
+all env variables must be defined in .env files
+Every variable must starts with the prefix REACT_APP_, otherwise, this variable wil be ignored by React

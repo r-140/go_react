@@ -6,7 +6,7 @@ class Layout extends Component {
     return (
         <div>
             <div>
-                <h1>MadOwlNews.com - Breaking news about Mad Owls</h1>
+                <h1>MyNews.com - Breaking news about the world</h1>
             </div>
             <div>
             <ul>

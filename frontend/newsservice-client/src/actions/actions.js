@@ -16,7 +16,7 @@ function newsReceived(news){
 
 export function fetchNews(){
     return dispatch => {
-        return fetch(`/news`)
+        return fetch(`${process.env.REACT_APP_API_PROXY}/news`)
         .then( (response) => response.json() )
         .then( (data) => {
             dispatch(newsReceived(data))
@@ -27,7 +27,7 @@ export function fetchNews(){
 
 export function fetchNewsItem(id){
     return dispatch => {
-        return fetch(`/news/${id}`)
+        return fetch(`${process.env.REACT_APP_API_PROXY}/news/${id}`)
         .then( (response) => response.json() )
         .then( (data) => dispatch(newsItemReceived(data)))
         .catch( (e) => console.log(e) );
