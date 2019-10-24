@@ -18,7 +18,7 @@ type MongoClient struct {
 
 // OpenDbClient ...
 func (mc *MongoClient) OpenDbClient() {
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	clientOptions := options.Client().ApplyURI("mongodb://mongodb:27017")
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
 	mc.client = client

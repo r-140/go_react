@@ -8,7 +8,8 @@ to build backend run
 
 > export GOOS=linux
 > go build -o newsservice-linux-amd64
-> export GOOS=darwin
+> export GOOS=linux
+
 
 
 docker rm $(docker ps -a -q)
