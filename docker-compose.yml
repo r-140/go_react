@@ -24,30 +24,10 @@ services:
             - "6768:6768"
         networks:
             - nw_go
+        restart: always    
+        
         logging:
             driver: json-file
-
-    # postgresdb:
-    #     container_name: postgresdb
-    #     build:
-    #         context: database/postgresdb
-    #         dockerfile: Dockerfile
-    #     image: postgresdb:latest
-    #     ports:
-    #         - "5432:5432"
-
-    #     healthcheck:
-    #         test: ["CMD-SHELL", "pg_isready -U postgres"]
-    #         interval: 10s
-    #         timeout: 5s
-    #         retries: 5
-
-    #     networks:
-    #         - nw_go
-    #     volumes:
-    #         - pgdata_doc:/var/lib/postgresql
-    #         - pgdoclogs:/var/log/postgresql
-    #         - pgdocetc:/etc/postgresql
 
     mongodb:
         # image: mongo:latest
