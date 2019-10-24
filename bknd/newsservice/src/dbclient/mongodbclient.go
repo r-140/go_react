@@ -7,6 +7,8 @@ import (
 	"model"
 	"strconv"
 
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -82,14 +84,17 @@ func (mc *MongoClient) QueryNews(newsID string) (model.News, error) {
 
 	fmt.Println("newsId ", newsID)
 
-	// filter := bson.D{"_id": newsID}
-	// filter := bson.D
+	_id, err := primitive.ObjectIDFromHex(newsID)
+	if err != nil {
+		panic("wrong _id format")
+	}
 
+	filter := bson.D{{"_id", _id}}
 	var result model.News
 
 	collection := mc.client.Database("newsDb").Collection("news")
 
-	err := collection.FindOne(context.TODO(), newsID).Decode(&result)
+	err = collection.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -112,8 +117,7 @@ func (mc *MongoClient) seedNews() {
 	total := 10
 	for i := 0; i < total; i++ {
 
-		// Generate a key 10000 or larger
-		key := strconv.Itoa(10000 + i)
+		key := primitive.NewObjectID()
 
 		// Create an instance of our News struct
 		news := model.News{

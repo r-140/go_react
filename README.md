@@ -8,7 +8,7 @@ to build backend run
 
 > export GOOS=linux
 > go build -o newsservice-linux-amd64
-> export GOOS=linux
+> export GOOS=darwin
 
 
 

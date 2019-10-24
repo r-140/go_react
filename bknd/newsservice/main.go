@@ -11,11 +11,11 @@ var appName = "newsservice"
 
 func main() {
 	fmt.Printf("Starting %v\n", appName)
-	initializeBoltClient()
+	initializeMongoClient()
 	service.StartWebServer("6768")
 }
 
-func initializeBoltClient() {
+func initializeMongoClient() {
 	service.DBClient = &dbclient.MongoClient{}
 	service.DBClient.OpenDbClient()
 	service.DBClient.Seed()
