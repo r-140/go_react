@@ -22,6 +22,7 @@ to install mongo
 
 
 to run backend ervice in terminal
-1. run export PORT=6767
-2. run export MONGODB_URL=mongodb://mongodb:27017
-3. run go run main.go
+1.export GOPATH=/Users/Illia_Ushakov/go_workspace/react_go_graphql/bknd/newsservice
+1.  export PORT=6767
+2.  export MONGODB_URL=mongodb://mongodb:27017
+3.  go run main.go
