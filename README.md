@@ -19,3 +19,9 @@ all env variables must be defined in .env files
 Every variable must starts with the prefix REACT_APP_, otherwise, this variable wil be ignored by React
 
 to install mongo
+
+
+to run backend ervice in terminal
+1. run export PORT=6767
+2. run export MONGODB_URL=mongodb://mongodb:27017
+3. run go run main.go

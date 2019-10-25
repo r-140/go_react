@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"model"
+	"os"
 	"strconv"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -20,7 +21,9 @@ type MongoClient struct {
 
 // OpenDbClient ...
 func (mc *MongoClient) OpenDbClient() {
-	clientOptions := options.Client().ApplyURI("mongodb://mongodb:27017")
+	mongoUrl := os.Getenv("MONGODB_URL")
+
+	clientOptions := options.Client().ApplyURI(mongoUrl)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
 	mc.client = client
