@@ -17,7 +17,7 @@ func StartWebServer(port string) {
 	err := http.ListenAndServe(":"+port, handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
 		handlers.AllowedMethods([]string{"POST", "OPTIONS"}),
-		handlers.AllowedHeaders([]string{"Content-Type", "X-Requested-With"}),
+		handlers.AllowedHeaders([]string{"Content-Type", "X-Requested-With", "Authorization"}),
 	)(r))
 
 	if err != nil {
