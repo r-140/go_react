@@ -85,6 +85,35 @@ func CreateNews(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// CreateComment ...
+func CreateComment(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	var newsID = mux.Vars(r)["newsID"]
+
+	decoder := json.NewDecoder(r.Body)
+	var comment model.Comment
+	err := decoder.Decode(&comment)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("CreateComment: news from body ", comment)
+
+	result, error := DBClient.CreateComment(newsID, comment)
+
+	if error != nil {
+		fmt.Println("Some error occured creating news " + error.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	// If found, marshal into JSON, write headers and content
+	data, _ := json.Marshal(result)
+	writeJsonResponse(w, http.StatusCreated, data)
+
+}
+
 // Signup ...
 func Signup(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)

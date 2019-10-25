@@ -25,6 +25,12 @@ export default (state = initialState, action) => {
       updated['newsItemLoading'] = true;
       return updated
 
+    case constants.NEWS_ADDCOMMENT:
+        var updatedComments = Object.assign([], updated['newsItem'].comments);
+        updatedComments.push({"username": action.username, "body": action.body});
+        updated['newsItem'].comments = updatedComments;
+        return updated
+
     default:
       return state;
     }

@@ -12,6 +12,7 @@ class News extends Component {
    
 
     render(){
+        console.log("news ", this.props.news)
         const newsItems = this.props.news.map( (news, i) => {
             return ( <li key={i}><NewsItemListing data = {news} /></li> );
         });

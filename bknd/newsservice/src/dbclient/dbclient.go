@@ -14,4 +14,5 @@ type IDbClient interface {
 	Check() bool
 	QueryUser(username string) (model.User, error)
 	CreateUser(user model.User) (string, error)
+	CreateComment(newsID string, comment model.Comment) (string, error)
 }

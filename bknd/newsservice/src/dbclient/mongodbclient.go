@@ -101,6 +101,10 @@ func (mc *MongoClient) QueryNews(newsID string) (model.News, error) {
 		log.Fatal(err)
 	}
 
+	if result.Comments == nil {
+		result.Comments = make([]model.Comment, 0)
+	}
+
 	fmt.Printf("Found a single document: %+v\n", result)
 
 	return result, err
@@ -156,6 +160,46 @@ func (mc *MongoClient) CreateNews(news model.News) (string, error) {
 	fmt.Printf("Created a single document: %+v\n", result)
 
 	return result, err
+}
+
+// CreateComment creates comments to database
+func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (string, error) {
+	fmt.Println("CreateComment(): comment ", comment)
+
+	news, err := mc.QueryNews(newsID)
+
+	fmt.Println("CreateComment(): found news ", news)
+
+	if err != nil {
+		panic(err)
+	}
+
+	news.Comments = append(news.Comments, comment)
+
+	fmt.Println("CreateComment(): fcomments ", news.Comments)
+
+	collection := mc.client.Database("newsDb").Collection("news")
+
+	_id, err := primitive.ObjectIDFromHex(newsID)
+	if err != nil {
+		panic("wrong _id format")
+	}
+
+	filter := bson.D{{"_id", _id}}
+
+	update := bson.D{{"$set",
+		bson.D{
+			{"comments", news.Comments},
+		},
+	}}
+
+	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+
+	return "comment has been created", err
 }
 
 // Seed Start seeding news
