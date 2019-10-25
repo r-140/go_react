@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
-import { fetchNewsItem } from '../../actions/actions'
+// import { fetchNewsItem } from '../../actions/newsActions'
 
 class NewsItemDetail extends Component {
 

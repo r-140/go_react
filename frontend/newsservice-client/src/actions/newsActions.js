@@ -72,10 +72,9 @@ export function submitComment(newsItemID, username, data){
              headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`
               },
-            body: JSON.stringify(data)
-            // mode: 'cors'
+            body: JSON.stringify(data),
+            mode: 'cors'
         })
             .then( (response) => {
                 if (!response.ok) {

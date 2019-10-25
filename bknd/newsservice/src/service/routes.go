@@ -42,25 +42,4 @@ var routes = Routes{
 		"/news/{newsID}/comment",
 		CreateComment,
 	},
-
-	Route{
-		"Signin",
-		"POST",
-		"/signin",
-		Signin,
-	},
-
-	Route{
-		"Signup",
-		"POST",
-		"/signup",
-		Signup,
-	},
-
-	Route{
-		"Refresh",
-		"POST",
-		"/refresh",
-		Refresh,
-	},
 }

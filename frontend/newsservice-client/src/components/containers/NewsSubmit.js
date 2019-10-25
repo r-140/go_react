@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 // import NewsItemDetail from '../presentation/NewsItemDetail';
 import { connect } from 'react-redux';
-import { submitNewsStory } from '../../actions/actions';
+import { submitNewsStory } from '../../actions/newsActions';
 import { withRouter } from "react-router-dom";
 
 class NewsSubmit extends Component {

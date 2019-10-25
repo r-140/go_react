@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { submitComment } from '../../actions/actions';
+import { submitComment } from '../../actions/newsActions';
 import { connect } from 'react-redux';
 
 class CreateComment extends Component {
@@ -41,9 +41,9 @@ class CreateComment extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        username: state.auth.username        
-    }
+    // return {
+    //     username: state.auth.username        
+    // }
 }
 
 export default connect(mapStateToProps)(CreateComment);
