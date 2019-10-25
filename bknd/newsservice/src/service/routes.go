@@ -35,4 +35,25 @@ var routes = Routes{
 		"/news",
 		CreateNews,
 	},
+
+	Route{
+		"Signin",
+		"POST",
+		"/signin",
+		Signin,
+	},
+
+	Route{
+		"Signup",
+		"POST",
+		"/signup",
+		Signup,
+	},
+
+	Route{
+		"Refresh",
+		"POST",
+		"/refresh",
+		Refresh,
+	},
 }

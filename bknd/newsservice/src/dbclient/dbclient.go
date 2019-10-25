@@ -10,6 +10,8 @@ type IDbClient interface {
 	QueryNews(newsID string) (model.News, error)
 	QueryAllNews() ([]model.News, error)
 	CreateNews(model.News) (string, error)
-	Seed()
+	// Seed()
 	Check() bool
+	QueryUser(username string) (model.User, error)
+	CreateUser(user model.User) (string, error)
 }

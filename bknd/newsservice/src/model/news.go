@@ -12,6 +12,17 @@ type News struct {
 	Body   string             `json:"body" json:"body"`
 }
 
+// User represents user collection in db
+type User struct {
+	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
+}
+
+// ComparePwd compares pwds
+func (user *User) ComparePwd(password string) bool {
+	return user.Password == password
+}
+
 // func (a *News) String() string {
 // 	return a.Id + " " + a.Title + " " + a.Teaser
 // }
