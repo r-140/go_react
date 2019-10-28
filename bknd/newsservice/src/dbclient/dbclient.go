@@ -10,7 +10,6 @@ type IDbClient interface {
 	QueryNews(newsID string) (model.News, error)
 	QueryAllNews() ([]model.News, error)
 	CreateNews(model.News) (string, error)
-	// Seed()
 	Check() bool
 	CreateComment(newsID string, comment model.Comment) (string, error)
 }

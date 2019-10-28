@@ -113,7 +113,7 @@ func (mc *MongoClient) QueryNews(newsID string) (model.News, error) {
 // CreateNews ...
 func (mc *MongoClient) CreateNews(news model.News) (string, error) {
 
-	news.Id = primitive.NewObjectID()
+	news.ID = primitive.NewObjectID()
 
 	fmt.Println("news ", news)
 
