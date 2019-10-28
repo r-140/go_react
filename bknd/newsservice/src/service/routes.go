@@ -1,6 +1,11 @@
 package service
 
-import "net/http"
+import (
+	"graphql"
+	"net/http"
+
+	gqlhandler "github.com/graphql-go/graphql-go-handler"
+)
 
 // Route Defines a single route, e.g. a human readable name, HTTP method, pattern the function that will execute when the route is called.
 type Route struct {
@@ -41,5 +46,14 @@ var routes = Routes{
 		"POST",
 		"/news/{newsID}/comment",
 		CreateComment,
+	},
+	Route{
+		"GraphQL",  // Name
+		"POST",     // HTTP method
+		"/graphql", // Route pattern
+		gqlhandler.New(&gqlhandler.Config{
+			Schema: &graphql.Schema,
+			Pretty: false,
+		}).ServeHTTP,
 	},
 }

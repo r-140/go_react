@@ -7,7 +7,8 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var schema graphql.Schema
+// Schema graphql schema definition for http endpoint
+var Schema graphql.Schema
 var schemaInitialized = false
 
 var newsList []internalModel.News
@@ -99,14 +100,14 @@ func InitQL(resolvers GraphQLResolvers) {
 		},
 		"AllNews": &graphql.Field{
 			Type: graphql.NewList(newsType),
-			Args: graphql.FieldConfigArgument{
-				"id": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-				"title": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-			},
+			// Args: graphql.FieldConfigArgument{
+			// 	"id": &graphql.ArgumentConfig{
+			// 		Type: graphql.String,
+			// 	},
+			// 	"title": &graphql.ArgumentConfig{
+			// 		Type: graphql.String,
+			// 	},
+			// },
 			Resolve: resolvers.AllNewsResolverFunc,
 		},
 	}
@@ -114,7 +115,7 @@ func InitQL(resolvers GraphQLResolvers) {
 	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
 	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
 	var err error
-	schema, err = graphql.NewSchema(schemaConfig)
+	Schema, err = graphql.NewSchema(schemaConfig)
 	if err != nil {
 		log.Fatalf("failed to create new schema, error: %v", err)
 	}
