@@ -65,7 +65,7 @@ func (gqlres *LiveGraphQLResolvers) CreateNewsResolverFunc(p graphql.ResolvePara
 
 	result, err := dbclient.DBClient.CreateNews(news)
 
-	fmt.Println("leaving  CreateNewsResolverFunc() found ", news)
+	fmt.Println("leaving  CreateNewsResolverFunc() found ", result)
 	return result, err
 }
 
