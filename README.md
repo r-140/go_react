@@ -70,12 +70,12 @@ mutation AddCommentMutation {
 
 to request news by id submit query
 {
-  News(id: "5db307734a2ab9fd2bd7e695") {
+  News(id: "5db851d75ec36eb337561b8b") {
     title
     teaser
     body
     comments {
-      
+      username
       body
     }
   }
