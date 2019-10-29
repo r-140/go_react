@@ -2,7 +2,7 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -27,14 +27,14 @@ func GetNewsById(w http.ResponseWriter, r *http.Request) {
 	// Read the 'newsId' path parameter from the mux map
 	var newsID = mux.Vars(r)["newsID"]
 
-	fmt.Println("GetNewsById DbClient ", dbclient.DBClient)
+	log.Println("GetNewsById DbClient ", dbclient.DBClient)
 
 	// Read the news struct Mongodb
 	news, err := dbclient.DBClient.QueryNews(newsID)
 
 	// If err, return a 404
 	if err != nil {
-		fmt.Println("Some error occured serving " + newsID + ": " + err.Error())
+		log.Println("Some error occured serving " + newsID + ": " + err.Error())
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
@@ -54,12 +54,12 @@ func CreateNews(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Println("CreateNews: news from body ", news)
+	log.Println("CreateNews: news from body ", news)
 
 	result, error := dbclient.DBClient.CreateNews(news)
 
 	if error != nil {
-		fmt.Println("Some error occured creating news " + error.Error())
+		log.Println("Some error occured creating news " + error.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -82,12 +82,12 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Println("CreateComment: news from body ", comment)
+	log.Println("CreateComment: news from body ", comment)
 
 	result, error := dbclient.DBClient.CreateComment(newsID, comment)
 
 	if error != nil {
-		fmt.Println("Some error occured creating news " + error.Error())
+		log.Println("Some error occured creating news " + error.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -103,11 +103,11 @@ func GetAllnews(w http.ResponseWriter, r *http.Request) {
 
 	news, err := dbclient.DBClient.QueryAllNews()
 
-	fmt.Println("GetAllnews DbClient ", dbclient.DBClient)
+	log.Println("GetAllnews DbClient ", dbclient.DBClient)
 
 	// If err, return a 404
 	if err != nil {
-		fmt.Println("Some error occured serving " + ": " + err.Error())
+		log.Println("Some error occured serving " + ": " + err.Error())
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}

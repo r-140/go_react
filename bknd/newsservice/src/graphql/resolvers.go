@@ -2,13 +2,11 @@ package graphql
 
 import (
 	"dbclient"
-	"fmt"
+	"log"
 	"model"
 
 	"github.com/graphql-go/graphql"
 )
-
-// var DBClient dbclient.IDbClient
 
 // GraphQLResolvers provides resolvers methods for  graphql schema
 type GraphQLResolvers interface {
@@ -24,10 +22,11 @@ type LiveGraphQLResolvers struct {
 
 // NewsResolverFunc grapgql resolver for getNews query
 func (gqlres *LiveGraphQLResolvers) NewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
-	fmt.Println("opening NewsResolverFunc() ")
+
+	log.Println("opening NewsResolverFunc() ")
 	newsID, _ := p.Args["id"].(string)
 
-	fmt.Println(" NewsResolverFunc() ID from argument ", newsID)
+	log.Println(" NewsResolverFunc() ID from argument ", newsID)
 	// if newsID == nil {
 	// 	panic("erroor parsing news id as an argument")
 	// }
@@ -41,19 +40,19 @@ func (gqlres *LiveGraphQLResolvers) NewsResolverFunc(p graphql.ResolveParams) (i
 
 // AllNewsResolverFunc graphql resolver for AllNews query
 func (gqlres *LiveGraphQLResolvers) AllNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
-	fmt.Println("opening AllNewsResolverFunc() ")
+
+	log.Println("opening AllNewsResolverFunc() ")
 
 	news, err := dbclient.DBClient.QueryAllNews()
 
-	fmt.Println("leaving  AllNewsResolverFunc() found ", news)
+	log.Println("leaving  AllNewsResolverFunc() found ", news)
 	return news, err
 }
 
 // CreateNewsResolverFunc graphql resolver for Create news mutation query
 func (gqlres *LiveGraphQLResolvers) CreateNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
-	fmt.Println("opening CreateNewsResolverFunc() ")
 
-	// var news model.News
+	log.Println("opening CreateNewsResolverFunc() ")
 
 	news := model.News{
 		Title:  p.Args["title"].(string),
@@ -61,17 +60,18 @@ func (gqlres *LiveGraphQLResolvers) CreateNewsResolverFunc(p graphql.ResolvePara
 		Body:   p.Args["body"].(string),
 	}
 
-	fmt.Println("CreateNewsResolverFunc: news from body ", news)
+	log.Println("CreateNewsResolverFunc: news from body ", news)
 
 	result, err := dbclient.DBClient.CreateNews(news)
 
-	fmt.Println("leaving  CreateNewsResolverFunc() found ", result)
+	log.Println("leaving  CreateNewsResolverFunc() found ", result)
 	return result, err
 }
 
 // AddCommentToNewsResolverFunc add comment mutation resolver
 func (gqlres *LiveGraphQLResolvers) AddCommentToNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
-	fmt.Println("opening AddCommentToNewsResolverFunc() ")
+
+	log.Println("opening AddCommentToNewsResolverFunc() ")
 	newsID, _ := p.Args["newsID"].(string)
 
 	username, _ := p.Args["username"].(string)
@@ -85,17 +85,17 @@ func (gqlres *LiveGraphQLResolvers) AddCommentToNewsResolverFunc(p graphql.Resol
 
 	result, err := dbclient.DBClient.CreateComment(newsID, comment)
 
-	fmt.Println("leaving AddCommentToNewsResolverFunc() result ", result)
+	log.Println("leaving AddCommentToNewsResolverFunc() result ", result)
 	return result, err
 }
 
 func fetchNews(newsID string) (model.News, error) {
 
-	fmt.Println("fetchNews newsID ", newsID)
+	log.Println("fetchNews newsID ", newsID)
 
 	news, err := dbclient.DBClient.QueryNews(newsID)
 
-	fmt.Println("fetchNews result ", news)
+	log.Println("fetchNews result ", news)
 
 	return news, err
 }
@@ -112,6 +112,7 @@ func fetchNews(newsID string) (model.News, error) {
 // 			return account, nil
 // 		}
 // 	}
+
 // 	return nil, fmt.Errorf("No account found matching ID %v", id)
 // }
 

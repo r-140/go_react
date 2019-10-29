@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
 	"dbclient"
 	"os"
@@ -11,7 +11,7 @@ import (
 var appName = "newsservice"
 
 func main() {
-	fmt.Printf("Starting %v\n", appName)
+	log.Printf("Starting %v\n", appName)
 	port := os.Getenv("PORT")
 
 	initializeMongoClient()

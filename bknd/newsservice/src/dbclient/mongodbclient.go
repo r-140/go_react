@@ -2,7 +2,7 @@ package dbclient
 
 import (
 	"context"
-	"fmt"
+
 	"log"
 	"model"
 	"os"
@@ -36,7 +36,7 @@ func (mc *MongoClient) OpenDbClient() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connected to MongoDB!")
+	log.Println("Connected to MongoDB!")
 
 }
 
@@ -76,7 +76,7 @@ func (mc *MongoClient) QueryAllNews() ([]model.News, error) {
 	}
 
 	cur.Close(context.TODO())
-	fmt.Printf("Found multiple documents (array of pointers): %+v\n", results)
+	log.Printf("Found multiple documents (array of pointers): %+v\n", results)
 
 	return results, err
 }
@@ -84,7 +84,7 @@ func (mc *MongoClient) QueryAllNews() ([]model.News, error) {
 // QueryNews ...
 func (mc *MongoClient) QueryNews(newsID string) (model.News, error) {
 
-	fmt.Println("newsId ", newsID)
+	log.Println("newsId ", newsID)
 
 	_id, err := primitive.ObjectIDFromHex(newsID)
 	if err != nil {
@@ -105,7 +105,7 @@ func (mc *MongoClient) QueryNews(newsID string) (model.News, error) {
 		result.Comments = make([]model.Comment, 0)
 	}
 
-	fmt.Printf("Found a single document: %+v\n", result)
+	log.Printf("Found a single document: %+v\n", result)
 
 	return result, err
 }
@@ -115,7 +115,7 @@ func (mc *MongoClient) CreateNews(news model.News) (string, error) {
 
 	news.ID = primitive.NewObjectID()
 
-	fmt.Println("news ", news)
+	log.Println("news ", news)
 
 	// TODO: add validation structure
 	result, err := mc.addNews(&news)
@@ -123,18 +123,18 @@ func (mc *MongoClient) CreateNews(news model.News) (string, error) {
 		panic(err)
 	}
 
-	fmt.Printf("Created a single document: %+v\n", result)
+	log.Printf("Created a single document: %+v\n", result)
 
 	return result, err
 }
 
 // CreateComment creates comments to database
 func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (string, error) {
-	fmt.Println("CreateComment(): comment ", comment)
+	log.Println("CreateComment(): comment ", comment)
 
 	news, err := mc.QueryNews(newsID)
 
-	fmt.Println("CreateComment(): found news ", news)
+	log.Println("CreateComment(): found news ", news)
 
 	if err != nil {
 		panic(err)
@@ -142,7 +142,7 @@ func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (stri
 
 	news.Comments = append(news.Comments, comment)
 
-	fmt.Println("CreateComment(): fcomments ", news.Comments)
+	log.Println("CreateComment(): fcomments ", news.Comments)
 
 	collection := mc.client.Database("newsDb").Collection("news")
 
@@ -163,7 +163,7 @@ func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (stri
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+	log.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
 
 	return "comment has been created", err
 }
@@ -175,7 +175,7 @@ func (mc *MongoClient) addNews(news *model.News) (string, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Inserted a Single Document: ", insertResult.InsertedID.(primitive.ObjectID).Hex())
+	log.Println("Inserted a Single Document: ", insertResult.InsertedID.(primitive.ObjectID).Hex())
 
 	return insertResult.InsertedID.(primitive.ObjectID).Hex(), err
 
