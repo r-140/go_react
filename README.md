@@ -34,3 +34,12 @@ curl http://localhost:6767/graphql -k -d {News(id: "5db307734a2ab9fd2bd7e695")}
 
 curl -d '{News(id: "5db307734a2ab9fd2bd7e695") {title, teaser, body comments{id, body}}}' -X POST -H "Content-Type: application/graphql" http://localhost:6767/graphql
 
+
+nice articles
+https://tutorialedge.net/golang/go-graphql-beginners-tutorial/
+https://tutorialedge.net/golang/go-graphql-beginners-tutorial-part-2/
+
+https://dzone.com/articles/go-microservices-part-14-graphql
+
+https://www.freecodecamp.org/news/deep-dive-into-graphql-with-golang-d3e02a429ac3/
+

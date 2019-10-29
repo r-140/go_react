@@ -84,6 +84,58 @@ func InitQL(resolvers GraphQLResolvers) {
 		},
 	})
 
+	var newsMutationType = graphql.NewObject(graphql.ObjectConfig{
+		Name: "CreateNewsMutation",
+		Fields: graphql.Fields{
+			"CreateNewsMutation": &graphql.Field{
+				Type:        newsType,
+				Description: "Add News",
+				Args: graphql.FieldConfigArgument{
+					"title": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"body": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+					"teaser": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.String),
+					},
+				},
+				Resolve: resolvers.CreateNewsResolverFunc,
+			},
+		},
+	})
+
+	// var commentMutationType = graphql.NewObject(graphql.ObjectConfig{
+	// 	Name: "CommentMutation",
+	// 	Fields: graphql.Fields{
+	// 		"create": &graphql.Field{
+	// 			Type:        commentType,
+	// 			Description: "Add Comment to News",
+	// 			Args: graphql.FieldConfigArgument{
+	// 				"newsID": &graphql.ArgumentConfig{
+	// 					Type: graphql.NewNonNull(graphql.String),
+	// 				},
+	// 				"body": &graphql.ArgumentConfig{
+	// 					Type: graphql.NewNonNull(graphql.String),
+	// 				},
+	// 				"username": &graphql.ArgumentConfig{
+	// 					Type: graphql.NewNonNull(graphql.String),
+	// 				},
+	// 			},
+	// 			Resolve: resolvers.AddCommentToNewsResolverFunc,
+	// 		},
+	// 	},
+	// })
+
+	// var rootMutation = graphql.NewObject(graphql.ObjectConfig{
+	// 	Name: "RootMutation",
+	// 	Fields: graphql.Fields{
+	// 		"CreateNewsMutation":    newsMutationType,
+	// 		"CreateCommentMutation": commentMutationType,
+	// 	},
+	// })
+
 	// Schema
 	fields := graphql.Fields{
 		"News": &graphql.Field{
@@ -106,7 +158,10 @@ func InitQL(resolvers GraphQLResolvers) {
 	}
 
 	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
-	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
+	schemaConfig := graphql.SchemaConfig{
+		Query:    graphql.NewObject(rootQuery),
+		Mutation: newsMutationType,
+	}
 	var err error
 	Schema, err = graphql.NewSchema(schemaConfig)
 	if err != nil {
