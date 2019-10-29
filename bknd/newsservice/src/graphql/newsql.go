@@ -101,7 +101,18 @@ func InitQL(resolvers GraphQLResolvers) {
 			Resolve: resolvers.CreateNewsResolverFunc,
 		},
 		"AddCommentMutation": &graphql.Field{
-			Type:    graphql.Type(commentType),
+			Type: graphql.Type(commentType),
+			Args: graphql.FieldConfigArgument{
+				"newsID": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"username": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"body": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
 			Resolve: resolvers.AddCommentToNewsResolverFunc,
 		},
 	}

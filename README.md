@@ -51,11 +51,22 @@ https://graphqlmastery.com/blog/graphql-quick-tip-how-to-pass-variables-in-graph
 
 to create news via graphql send mutation
 mutation CreateNewsMutation {
-  CreateNewsMutation( title: "gr_news", teaser: "gr_teaser", body: "gr_body") {
+  CreateNewsMutation(title: "gr_news2", teaser: "gr_teaser1", body: "gr_body") {
     id
-
+    title
+    teaser
+    body
   }
 }
+
+to add new comment to news via graphql send mutation
+mutation AddCommentMutation {
+  AddCommentMutation(newsID: "5db851d75ec36eb337561b8b", username: "ilyitch", body: "this is firat comment") {
+    username
+    body
+  }
+}
+
 
 to request news by id submit query
 {
