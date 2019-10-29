@@ -30,10 +30,11 @@ func (gqlres *LiveGraphQLResolvers) NewsResolverFunc(p graphql.ResolveParams) (i
 
 // AllNewsResolverFunc graphql resolver for AllNews query
 func (gqlres *LiveGraphQLResolvers) AllNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
+	fmt.Println("opening AllNewsResolverFunc() ")
+	fmt.Println("AllNewsResolverFunc DbClient ", DBClient)
 	news, err := DBClient.QueryAllNews()
 
-	fmt.Println("AllNewsResolverFunc result ", news)
-
+	fmt.Println("leaving  AllNewsResolverFunc() found ", news)
 	return news, err
 }
 

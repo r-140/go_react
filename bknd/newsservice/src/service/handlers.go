@@ -29,7 +29,9 @@ func GetNewsById(w http.ResponseWriter, r *http.Request) {
 	// Read the 'newsId' path parameter from the mux map
 	var newsID = mux.Vars(r)["newsID"]
 
-	// Read the news struct BoltDB
+	fmt.Println("GetNewsById DbClient ", DBClient)
+
+	// Read the news struct Mongodb
 	news, err := DBClient.QueryNews(newsID)
 
 	// If err, return a 404
@@ -102,6 +104,8 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 func GetAllnews(w http.ResponseWriter, r *http.Request) {
 
 	news, err := DBClient.QueryAllNews()
+
+	fmt.Println("GetAllnews DbClient ", DBClient)
 
 	// If err, return a 404
 	if err != nil {
