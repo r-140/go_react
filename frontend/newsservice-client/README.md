@@ -5,6 +5,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4. npm install redux react-redux redux-thunk --save
 5. add this to package.json "proxy": "http://localhost:6768",
 
+to install graphql
+npm install apollo-boost graphql --save
+npm install apollo-cache-inmemory apollo-link-http --save
+
+npm install graphql graphql-tag --save
+
+npm install react-apollo --save
+
 6. run npm run build
 
 
