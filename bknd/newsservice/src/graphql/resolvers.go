@@ -10,6 +10,7 @@ import (
 
 // var DBClient dbclient.IDbClient
 
+// GraphQLResolvers provides resolvers methods for  graphql schema
 type GraphQLResolvers interface {
 	NewsResolverFunc(p graphql.ResolveParams) (interface{}, error)
 	AllNewsResolverFunc(p graphql.ResolveParams) (interface{}, error)
@@ -21,7 +22,15 @@ type LiveGraphQLResolvers struct {
 
 // NewsResolverFunc grapgql resolver for getNews query
 func (gqlres *LiveGraphQLResolvers) NewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
-	news, err := fetchNews(p.Args["newsID"].(string))
+	fmt.Println("opening NewsResolverFunc() ")
+	newsID, _ := p.Args["id"].(string)
+
+	fmt.Println(" NewsResolverFunc() ID from argument ", newsID)
+	// if newsID == nil {
+	// 	panic("erroor parsing news id as an argument")
+	// }
+
+	news, err := fetchNews(newsID)
 	if err != nil {
 		return nil, err
 	}

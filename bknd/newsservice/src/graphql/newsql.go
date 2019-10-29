@@ -92,7 +92,7 @@ func InitQL(resolvers GraphQLResolvers) {
 				"id": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
-				"name": &graphql.ArgumentConfig{
+				"title": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
@@ -100,14 +100,7 @@ func InitQL(resolvers GraphQLResolvers) {
 		},
 		"AllNews": &graphql.Field{
 			Type: graphql.NewList(newsType),
-			// Args: graphql.FieldConfigArgument{
-			// 	"id": &graphql.ArgumentConfig{
-			// 		Type: graphql.String,
-			// 	},
-			// 	"title": &graphql.ArgumentConfig{
-			// 		Type: graphql.String,
-			// 	},
-			// },
+
 			Resolve: resolvers.AllNewsResolverFunc,
 		},
 	}
