@@ -43,3 +43,42 @@ https://dzone.com/articles/go-microservices-part-14-graphql
 
 https://www.freecodecamp.org/news/deep-dive-into-graphql-with-golang-d3e02a429ac3/
 
+
+https://graphqlmastery.com/blog/input-object-type-as-an-argument-for-graphql-mutations-and-queries
+
+https://graphqlmastery.com/blog/graphql-quick-tip-how-to-pass-variables-in-graphiql
+
+
+to create news via graphql send mutation
+mutation CreateNewsMutation {
+  CreateNewsMutation( title: "gr_news", teaser: "gr_teaser", body: "gr_body") {
+    id
+
+  }
+}
+
+to request news by id submit query
+{
+  News(id: "5db307734a2ab9fd2bd7e695") {
+    title
+    teaser
+    body
+    comments {
+      
+      body
+    }
+  }
+}
+
+to get all news submut query
+{
+  AllNews {
+    id
+    title
+    teaser
+	comments {
+	  body
+      username
+	}
+  }
+}
