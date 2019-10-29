@@ -13,3 +13,5 @@ type IDbClient interface {
 	Check() bool
 	CreateComment(newsID string, comment model.Comment) (string, error)
 }
+
+var DBClient IDbClient

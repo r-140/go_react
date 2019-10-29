@@ -8,7 +8,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var DBClient dbclient.IDbClient
+// var DBClient dbclient.IDbClient
 
 type GraphQLResolvers interface {
 	NewsResolverFunc(p graphql.ResolveParams) (interface{}, error)
@@ -31,8 +31,8 @@ func (gqlres *LiveGraphQLResolvers) NewsResolverFunc(p graphql.ResolveParams) (i
 // AllNewsResolverFunc graphql resolver for AllNews query
 func (gqlres *LiveGraphQLResolvers) AllNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
 	fmt.Println("opening AllNewsResolverFunc() ")
-	fmt.Println("AllNewsResolverFunc DbClient ", DBClient)
-	news, err := DBClient.QueryAllNews()
+	fmt.Println("AllNewsResolverFunc DbClient ", dbclient.DBClient)
+	news, err := dbclient.DBClient.QueryAllNews()
 
 	fmt.Println("leaving  AllNewsResolverFunc() found ", news)
 	return news, err
@@ -42,7 +42,7 @@ func fetchNews(newsID string) (model.News, error) {
 
 	fmt.Println("fetchNews newsID ", newsID)
 
-	news, err := DBClient.QueryNews(newsID)
+	news, err := dbclient.DBClient.QueryNews(newsID)
 
 	fmt.Println("fetchNews result ", news)
 

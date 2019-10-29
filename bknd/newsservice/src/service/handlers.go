@@ -12,8 +12,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var DBClient dbclient.IDbClient
-
 var client = &http.Client{}
 
 func init() {
@@ -29,10 +27,10 @@ func GetNewsById(w http.ResponseWriter, r *http.Request) {
 	// Read the 'newsId' path parameter from the mux map
 	var newsID = mux.Vars(r)["newsID"]
 
-	fmt.Println("GetNewsById DbClient ", DBClient)
+	fmt.Println("GetNewsById DbClient ", dbclient.DBClient)
 
 	// Read the news struct Mongodb
-	news, err := DBClient.QueryNews(newsID)
+	news, err := dbclient.DBClient.QueryNews(newsID)
 
 	// If err, return a 404
 	if err != nil {
@@ -58,7 +56,7 @@ func CreateNews(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("CreateNews: news from body ", news)
 
-	result, error := DBClient.CreateNews(news)
+	result, error := dbclient.DBClient.CreateNews(news)
 
 	if error != nil {
 		fmt.Println("Some error occured creating news " + error.Error())
@@ -86,7 +84,7 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("CreateComment: news from body ", comment)
 
-	result, error := DBClient.CreateComment(newsID, comment)
+	result, error := dbclient.DBClient.CreateComment(newsID, comment)
 
 	if error != nil {
 		fmt.Println("Some error occured creating news " + error.Error())
@@ -103,9 +101,9 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 // GetAllnews ...
 func GetAllnews(w http.ResponseWriter, r *http.Request) {
 
-	news, err := DBClient.QueryAllNews()
+	news, err := dbclient.DBClient.QueryAllNews()
 
-	fmt.Println("GetAllnews DbClient ", DBClient)
+	fmt.Println("GetAllnews DbClient ", dbclient.DBClient)
 
 	// If err, return a 404
 	if err != nil {

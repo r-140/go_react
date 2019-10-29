@@ -19,7 +19,7 @@ func main() {
 }
 
 func initializeMongoClient() {
-	service.DBClient = &dbclient.MongoClient{}
-	service.DBClient.OpenDbClient()
+	dbclient.DBClient = &dbclient.MongoClient{}
+	dbclient.DBClient.OpenDbClient()
 	// service.DBClient.Seed()
 }
