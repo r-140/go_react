@@ -35,6 +35,8 @@ func (gqlres *LiveGraphQLResolvers) NewsResolverFunc(p graphql.ResolveParams) (i
 	if err != nil {
 		return nil, err
 	}
+
+	log.Println(news.ID.Hex())
 	return news, nil
 }
 

@@ -67,7 +67,7 @@ func (mc *MongoClient) QueryAllNews() ([]model.News, error) {
 		if err != nil {
 			log.Fatal(err)
 		}
-
+		// elem.ID =
 		results = append(results, elem)
 	}
 

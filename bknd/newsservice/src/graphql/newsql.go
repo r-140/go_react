@@ -29,7 +29,7 @@ func InitQL(resolvers GraphQLResolvers) {
 		Name: "Comment",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
-				Type: graphql.String,
+				Type: internalModel.ObjectID,
 			},
 			"username": &graphql.Field{
 				Type: graphql.String,
@@ -45,7 +45,7 @@ func InitQL(resolvers GraphQLResolvers) {
 		Name: "News",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
-				Type: graphql.String,
+				Type: internalModel.ObjectID,
 			},
 			"title": &graphql.Field{
 				Type: graphql.String,
