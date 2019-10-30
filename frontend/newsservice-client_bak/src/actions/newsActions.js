@@ -42,11 +42,11 @@ export function fetchNewsItem(id){
     }    
 }
 
-function newsItemLoading(){
-    return {
-        type: actionTypes.NEWSITEM_LOADING
-    }
-}
+// function newsItemLoading(){
+//     return {
+//         type: actionTypes.NEWSITEM_LOADING
+//     }
+// }
 
 export function submitNewsStory(data){
     return dispatch => {

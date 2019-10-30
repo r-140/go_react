@@ -49,6 +49,9 @@ https://graphqlmastery.com/blog/input-object-type-as-an-argument-for-graphql-mut
 https://graphqlmastery.com/blog/graphql-quick-tip-how-to-pass-variables-in-graphiql
 
 
+https://medium.com/codingthesmartway-com-blog/getting-started-with-react-and-graphql-395311c1e8da
+
+
 to create news via graphql send mutation
 mutation CreateNewsMutation {
   CreateNewsMutation(title: "gr_news2", teaser: "gr_teaser1", body: "gr_body") {

@@ -1,18 +1,20 @@
-import React, {Component}
+import React
 from 'react';
 import News from '../containers/News';
 
-class Home extends Component {
-    render() {
-        return ( 
+
+const Home = () => (
+
+     
         <div>
             <div>Welcome to MyNews.com</div> 
             <div> 
                 <News />
             </div> 
         </div>
-        )
-    }
-}
+        
+);
+
+
 
 export default Home;
