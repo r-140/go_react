@@ -7,6 +7,7 @@ import { ApolloProvider } from "react-apollo";
 // import News from './containers/components/News'
 import Layout from './containers/layouts/Layout';
 import Home from './containers/layouts/Home';
+import NewsArticle from './containers/presentation/NewsArticle'
 import './App.css';
 
 const NEWSSERVICE_BASE_URL = `${process.env.REACT_APP_API_PROXY}/graphql`
@@ -21,7 +22,7 @@ const App = () => (
     <BrowserRouter>
         <Layout>
             <Route exact path="/" component={Home } />
-            {/* <Route path='/news/:id' component={NewsArticle}/>   */}
+            <Route path='/news/:id' component={NewsArticle}/>  
             {/* <Route path='/submit' component={NewsSubmit}/>   */}
         </Layout> 
     </BrowserRouter>
