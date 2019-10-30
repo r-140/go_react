@@ -21,8 +21,8 @@ const App = () => (
     <BrowserRouter>
         <Layout>
             <Route exact path="/" component={Home } />
-            {/* <Route path='/news/:id' component={NewsArticle}/>  
-            <Route path='/submit' component={NewsSubmit}/>   */}
+            {/* <Route path='/news/:id' component={NewsArticle}/>   */}
+            {/* <Route path='/submit' component={NewsSubmit}/>   */}
         </Layout> 
     </BrowserRouter>
 
