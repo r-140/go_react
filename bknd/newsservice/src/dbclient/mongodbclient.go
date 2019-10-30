@@ -140,6 +140,7 @@ func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (stri
 		panic(err)
 	}
 
+	comment.ID = primitive.NewObjectID()
 	news.Comments = append(news.Comments, comment)
 
 	log.Println("CreateComment(): fcomments ", news.Comments)
