@@ -11,5 +11,28 @@ const  GET_ALL_NEWS = gql`
   }
 `;
 
+// https://stackoverflow.com/questions/51522902/apollo-query-with-variable
 
-export { GET_ALL_NEWS };
+const GET_NEWS_BY_ID = gql` query GET_NEWS_BY_ID($id: String)
+{
+    News(id: $id) {
+      title
+      teaser
+      body
+      comments {
+        username
+        body
+      }
+    }
+  }
+`;
+
+// const query = gql`
+//   query User($okta: string) {
+//     User(okta: $okta){
+//       id
+//     }
+//   }
+// `;
+export { GET_ALL_NEWS, GET_NEWS_BY_ID };
+

@@ -1,8 +1,33 @@
 import React, { Component} from 'react';
-// import NewsItemDetail from '../presentation/NewsItemDetail';
+import { GET_NEWS_BY_ID } from '../../queries/query'
+import { Query } from "react-apollo";
+import NewsItemDetail from '../presentation/NewsItemDetail';
 // import CommentsPanel from './CommentsPanel';
-// import { connect } from 'react-redux'
-// import { fetchNewsItem } from '../../actions/newsActions'
+
+
+
+
+// const NewsArticle = (props) => (
+     
+//     <Query
+//       query={GET_NEWS_BY_ID}
+//       variables = {props.match.params.id}
+        
+
+//     >
+//       {({ loading, error, data }) => {
+//         if (loading) return <p>Loading...</p>;
+//         if (error) return <p>Error :(</p>;
+//         // return data.AllNews.map((newsItem) => (
+//         //   <NewsItem item={newsItem} />
+//         return <div><NewsItemDetail data={data.News} /></div> 
+        
+//       }}
+//     </Query>
+//   );
+
+
+
 
 class NewsArticle extends Component {
 
@@ -12,10 +37,26 @@ class NewsArticle extends Component {
     // }
 
     render(){
-        console.log("properties id ", this.props.match.params.id)
+        const id = this.props.match.params.id;
+        console.log("properties params ", id)
         return (
             <div>
-                <h2>News Story</h2>
+                <Query
+                    query={GET_NEWS_BY_ID}
+                    variables = {{id}}
+                    >
+                    {({ loading, error, data }) => {
+                        if (loading) return <p>Loading...</p>;
+                        if (error) {
+                            console.log("error ", error.Message)
+                            return <p>error </p>;
+
+                        } 
+
+                        return <div><NewsItemDetail data={data.News} /></div> 
+                        
+                    }}
+                </Query>
 
                 {/* <ul>
                     { !this.props.newsItemLoading ? <div><NewsItemDetail data={this.props.newsItem} /> <CommentsPanel comments={this.props.comments} id={this.props.newsItem._id} /></div> : <div>Loading</div>}
@@ -23,8 +64,12 @@ class NewsArticle extends Component {
             </div>
         )
     }
+
+    
+    
 }
 
+ 
 
 
 export default NewsArticle
