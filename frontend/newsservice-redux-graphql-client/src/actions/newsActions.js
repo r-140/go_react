@@ -1,5 +1,5 @@
 import actionTypes from '../constants/actionTypes';
-import {GET_ALL_NEWS, GET_NEWS_BY_ID, CREATE_NEWS} from './newsServiceQLQueries'
+import {GET_ALL_NEWS, GET_NEWS_BY_ID, CREATE_NEWS, ADD_COMMENT} from './newsServiceQLQueries'
 import client from '../graphqlconfig/graphqlconfig' 
 
 function addComment(username, body){
@@ -30,7 +30,6 @@ export function fetchNews(){
         client.query({
             query: GET_ALL_NEWS
           }).then(data => {
-            //   console.log("fetchNews allNews ", data.data.AllNews)
             dispatch(newsReceived(data.data.AllNews))
           }).catch(e => { console.log(e)
           });
@@ -56,7 +55,6 @@ export function fetchNewsItem(id){
 // }
 
 export function submitNewsStory(data){
-    console.log("submitNewsStory() data ", data)
 
     const title = data.title
     const teaser = data.teaser;
@@ -73,27 +71,37 @@ export function submitNewsStory(data){
 }
 
 export function submitComment(newsItemID, username, data){
-    var token = localStorage.getItem('token') || null;
-    console.log("submitComment token  ", token)
+    // console.log("submitComment newsItemID  ", newsItemID)
+    // console.log("submitComment data  ", data.body)
 
     return dispatch => {
-        return fetch(`${process.env.REACT_APP_API_PROXY}/news/${newsItemID}/comment`, { 
-            method: 'POST', 
-             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-              },
-            body: JSON.stringify(data),
-            mode: 'cors'
-        })
-            .then( (response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }else{
+            const body = data.body
+            client.mutate({
+                mutation: ADD_COMMENT,
+                variables: {newsID: newsItemID, username, body}
+              }).then(data => {
+                  console.log("submitComment data received ", data)
+                dispatch(addComment(username, data.body))
+              }).catch(e => { console.log(e)
+              });
+        }    
+        // return fetch(`${process.env.REACT_APP_API_PROXY}/news/${newsItemID}/comment`, { 
+        //     method: 'POST', 
+        //      headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //       },
+        //     body: JSON.stringify(data),
+        //     mode: 'cors'
+        // })
+        //     .then( (response) => {
+        //         if (!response.ok) {
+        //             throw Error(response.statusText);
+        //         }else{
 
-                    dispatch(addComment(username, data.body))
-                }
-            })
-            .catch( (e) => console.log(e) );
-    }    
+        //             dispatch(addComment(username, data.body))
+        //         }
+        //     })
+        //     .catch( (e) => console.log(e) );
+    // }    
 }

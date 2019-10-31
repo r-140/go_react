@@ -7,7 +7,7 @@ class CommentsPanel extends Component {
 
     render(){
 
-        console.log("comments ", this.props.comments)
+        console.log("CommentsPanel props ", this.props)
         const commentItems = this.props.comments.map( (comment, i) => {
             return ( <li key={i}><CommentElement data = {comment} /></li> );
         });

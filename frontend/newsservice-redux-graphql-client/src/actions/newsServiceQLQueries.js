@@ -15,6 +15,7 @@ const  GET_ALL_NEWS = gql`
 const GET_NEWS_BY_ID = gql` query GET_NEWS_BY_ID($id: String)
 {
     News(id: $id) {
+      id
       title
       teaser
       body
@@ -39,24 +40,14 @@ const CREATE_NEWS = gql` mutation CREATE_NEWS ($title: String, $teaser: String, 
 `;
 
 
-// const ADD_COMMENT = gql`
-//     mutation AddCommentMutation {
-//         AddCommentMutation($newsID: ID!, $username: username!, $body: body!) {
-//         username
-//         body
-//         }
-//     }
-// `;
+const ADD_COMMENT = gql` mutation ADD_COMMENT ($newsID: String, $username: String, $body: String)
+  {
+      AddCommentMutation(newsID: $newsID, username: $username, body: $body) {
+      username
+      body
+    }
+  }
+`;
 
-export { GET_ALL_NEWS, GET_NEWS_BY_ID, CREATE_NEWS };
+export { GET_ALL_NEWS, GET_NEWS_BY_ID, CREATE_NEWS, ADD_COMMENT };
 
-// const STAR_REPOSITORY = gql`
-//   mutation($id: ID!) {
-//     addStar(input: { starrableId: $id }) {
-//       starrable {
-//         id
-//         viewerHasStarred
-//       }
-//     }
-//   }
-// `;

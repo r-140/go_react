@@ -12,12 +12,12 @@ class NewsArticle extends Component {
     }
 
     render(){
-
+        console.log("NewsArticle props ", this.props.newsItem)
         return (
             <div>
                 <h2>News Story</h2>
                 <ul>
-                    { !this.props.newsItemLoading ? <div><NewsItemDetail data={this.props.newsItem} /> <CommentsPanel comments={this.props.comments} id={this.props.newsItem._id} /></div> : <div>Loading</div>}
+                    { !this.props.newsItemLoading ? <div><NewsItemDetail data={this.props.newsItem} /> <CommentsPanel comments={this.props.comments} id={this.props.newsItem.id} /></div> : <div>Loading</div>}
                 </ul>
             </div>
         )

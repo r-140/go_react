@@ -73,9 +73,14 @@ func (gqlres *LiveGraphQLResolvers) CreateNewsResolverFunc(p graphql.ResolvePara
 // AddCommentToNewsResolverFunc add comment mutation resolver
 func (gqlres *LiveGraphQLResolvers) AddCommentToNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
 
-	log.Println("opening AddCommentToNewsResolverFunc() ")
+	log.Println("opening AddCommentToNewsResolverFunc() ", p.Args)
 	newsID, _ := p.Args["newsID"].(string)
 
+	if len(newsID) == 0 {
+		panic("AddCommentToNewsResolverFunc(): newsId is empty")
+	}
+
+	log.Println(" AddCommentToNewsResolverFunc() newsID ", newsID)
 	username, _ := p.Args["username"].(string)
 
 	body, _ := p.Args["body"].(string)
