@@ -1,20 +1,36 @@
-import React
-from 'react';
-import News from '../containers/News';
+import React, { Component} from 'react';
+import NewsItemListing from '../presentation/NewsItemListing';
+import { connect } from 'react-redux'
 
+import { fetchNews } from '../../actions/newsActions'
 
-const Home = () => (
+class News extends Component {
 
-     
-        <div>
-            <div>Welcome to MyNews.com</div> 
-            <div> 
-                <News />
-            </div> 
-        </div>
-        
-);
+    componentDidMount(){
+        this.props.dispatch(fetchNews());
+    }
+   
 
+    render(){
+        console.log("news ", this.props)
+        const newsItems = this.props.news.map( (news, i) => {
+            return ( <li key={i}><NewsItemListing data = {news} /></li> );
+        });
 
+        return (
+            <div>
+                <h2>News Items</h2>
+                {(this.props.news.length > 0) ? <ul>{newsItems}</ul> : <div>Sorry we have no news</div>}
+            
+            </div>
+        )
+    }
+}
 
-export default Home;
+const mapStateToProps = state => {
+    return {
+        news: state.news.news
+    }
+}
+
+export default connect(mapStateToProps)(News)

@@ -11,23 +11,24 @@ import { Provider } from 'react-redux';
 import store from './stores/store';
 
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import client from './graphqlconfig/graphqlconfig' 
+// import { ApolloClient } from 'apollo-client';
+// import { HttpLink } from 'apollo-link-http';
+// import { InMemoryCache } from 'apollo-cache-inmemory';
 
  
-const NEWSSERVICE_BASE_URL = `${process.env.REACT_APP_API_PROXY}/graphql`
-const httpLink = new HttpLink({
-  uri: NEWSSERVICE_BASE_URL,
+// const NEWSSERVICE_BASE_URL = `${process.env.REACT_APP_API_PROXY}/graphql`
+// const httpLink = new HttpLink({
+//   uri: NEWSSERVICE_BASE_URL,
 
-});
+// });
 
-const cache = new InMemoryCache();
+// const cache = new InMemoryCache();
 
-const client = new ApolloClient({
-    link: httpLink,
-    cache,
-  });
+// const client = new ApolloClient({
+//     link: httpLink,
+//     cache,
+//   });
 
 
   const App = () => (
@@ -36,9 +37,9 @@ const client = new ApolloClient({
             <BrowserRouter>
                 <Layout>
                     <Route exact path="/" component={Home } />
-                    {/* <Route path="/about" component={About} /> 
+                    <Route path="/about" component={About} /> 
                     <Route path='/news/:id' component={NewsArticle}/>  
-                    <Route path='/submit' component={NewsSubmit}/>   */}
+                    <Route path='/submit' component={NewsSubmit}/>  
                 </Layout> 
             </BrowserRouter>
         </Provider> 

@@ -1,21 +1,7 @@
 import gql from 'graphql-tag';
 
 
-// const GET_NEWS_BY_ID = gql`
-//     {
-//         News($id: ID!)) {
-//           title
-//           teaser
-//           body
-//           comments {
-//             username
-//             body
-//           }
-//         }
-//       }
-// `;
-
-const  GET_ALL_NEWS = gql`
+const  GET_ALL_NEWS = gql` 
 {
     AllNews {
         id
@@ -23,6 +9,20 @@ const  GET_ALL_NEWS = gql`
         teaser
         
       }
+  }
+`;
+
+const GET_NEWS_BY_ID = gql` query GET_NEWS_BY_ID($id: String)
+{
+    News(id: $id) {
+      title
+      teaser
+      body
+      comments {
+        username
+        body
+      }
+    }
   }
 `;
 
@@ -48,7 +48,7 @@ const  GET_ALL_NEWS = gql`
 //     }
 // `;
 
-export { GET_ALL_NEWS };
+export { GET_ALL_NEWS, GET_NEWS_BY_ID };
 
 // const STAR_REPOSITORY = gql`
 //   mutation($id: ID!) {

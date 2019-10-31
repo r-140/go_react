@@ -1,4 +1,6 @@
 import actionTypes from '../constants/actionTypes';
+import {GET_ALL_NEWS} from './newsServiceQLQueries'
+import client from '../graphqlconfig/graphqlconfig' 
 
 function addComment(username, body){
     return {
@@ -16,6 +18,7 @@ function newsItemReceived(newsItem){
 }
 
 function newsReceived(news){
+    console.log(" newsReceived ", news)
     return {
         type: actionTypes.NEWS_RECEIVED,
         news: news
@@ -24,12 +27,13 @@ function newsReceived(news){
 
 export function fetchNews(){
     return dispatch => {
-        return fetch(`${process.env.REACT_APP_API_PROXY}/news`)
-        .then( (response) => response.json() )
-        .then( (data) => {
-            dispatch(newsReceived(data))
-        })
-        .catch( (e) => console.log(e) );
+        client.query({
+            query: GET_ALL_NEWS
+          }).then(data => {
+            //   console.log("fetchNews allNews ", data.data.AllNews)
+            dispatch(newsReceived(data.data.AllNews))
+          }).catch(e => { console.log(e)
+          });
     }    
 }
 
