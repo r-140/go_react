@@ -52,23 +52,47 @@ func (gqlres *LiveGraphQLResolvers) AllNewsResolverFunc(p graphql.ResolveParams)
 }
 
 // CreateNewsResolverFunc graphql resolver for Create news mutation query
+// CreateNewsResolverFunc graphql resolver for Create news mutation query
 func (gqlres *LiveGraphQLResolvers) CreateNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
 
 	log.Println("opening CreateNewsResolverFunc() ")
 
-	news := model.News{
+	news4Create := model.News{
 		Title:  p.Args["title"].(string),
 		Teaser: p.Args["teaser"].(string),
 		Body:   p.Args["body"].(string),
 	}
 
-	log.Println("CreateNewsResolverFunc: news from body ", news)
+	log.Println("CreateNewsResolverFunc: news from body ", news4Create)
 
-	result, err := dbclient.DBClient.CreateNews(news)
+	createdID, err := dbclient.DBClient.CreateNews(news4Create)
+	if err != nil {
+		return nil, err
+	}
 
-	log.Println("leaving  CreateNewsResolverFunc() found ", result)
-	return result, err
+	news, err := fetchNews(createdID)
+
+	log.Println("  leaving CreateNewsResolverFunc() created ", news)
+	return news, err
 }
+
+// func (gqlres *LiveGraphQLResolvers) CreateNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {
+
+// 	log.Println("opening CreateNewsResolverFunc() ")
+
+// 	news := model.News{
+// 		Title:  p.Args["title"].(string),
+// 		Teaser: p.Args["teaser"].(string),
+// 		Body:   p.Args["body"].(string),
+// 	}
+
+// 	log.Println("CreateNewsResolverFunc: news from body ", news)
+
+// 	result, err := dbclient.DBClient.CreateNews(news)
+
+// 	log.Println("leaving  CreateNewsResolverFunc() found ", result)
+// 	return result, err
+// }
 
 // AddCommentToNewsResolverFunc add comment mutation resolver
 func (gqlres *LiveGraphQLResolvers) AddCommentToNewsResolverFunc(p graphql.ResolveParams) (interface{}, error) {

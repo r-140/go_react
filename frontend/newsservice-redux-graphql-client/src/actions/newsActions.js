@@ -18,7 +18,6 @@ function newsItemReceived(newsItem){
 }
 
 function newsReceived(news){
-    console.log(" newsReceived ", news)
     return {
         type: actionTypes.NEWS_RECEIVED,
         news: news
@@ -64,15 +63,14 @@ export function submitNewsStory(data){
             mutation: CREATE_NEWS,
             variables: {title, teaser, body}
           }).then(data => {
-            dispatch(newsItemReceived(data.data.News))
+              console.log("submitNewsStory received ", data.data.CreateNewsMutation)
+            dispatch(newsItemReceived(data.data.CreateNewsMutation))
           }).catch(e => { console.log(e)
           });
     }    
 }
 
 export function submitComment(newsItemID, username, data){
-    // console.log("submitComment newsItemID  ", newsItemID)
-    // console.log("submitComment data  ", data.body)
 
     return dispatch => {
             const body = data.body
@@ -85,23 +83,5 @@ export function submitComment(newsItemID, username, data){
               }).catch(e => { console.log(e)
               });
         }    
-        // return fetch(`${process.env.REACT_APP_API_PROXY}/news/${newsItemID}/comment`, { 
-        //     method: 'POST', 
-        //      headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //       },
-        //     body: JSON.stringify(data),
-        //     mode: 'cors'
-        // })
-        //     .then( (response) => {
-        //         if (!response.ok) {
-        //             throw Error(response.statusText);
-        //         }else{
-
-        //             dispatch(addComment(username, data.body))
-        //         }
-        //     })
-        //     .catch( (e) => console.log(e) );
-    // }    
+   
 }
