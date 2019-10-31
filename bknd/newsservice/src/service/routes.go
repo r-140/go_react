@@ -22,32 +22,6 @@ type Routes []Route
 var routes = Routes{
 
 	Route{
-		"GetNewsById",    // Name
-		"GET",            // HTTP method
-		"/news/{newsID}", // Route pattern
-		GetNewsById,
-	},
-
-	Route{
-		"GetAllnews",
-		"GET",
-		"/news",
-		GetAllnews,
-	},
-	Route{
-		"CreateNews",
-		"POST",
-		"/news",
-		CreateNews,
-	},
-
-	Route{
-		"CreateComment",
-		"POST",
-		"/news/{newsID}/comment",
-		CreateComment,
-	},
-	Route{
 		"GraphQL",  // Name
 		"POST",     // HTTP method
 		"/graphql", // Route pattern
