@@ -27,16 +27,16 @@ const GET_NEWS_BY_ID = gql` query GET_NEWS_BY_ID($id: String)
 `;
 
 
-// const CREATE_NEWS = gql`
-//     mutation CreateNewsMutation {
-//         CreateNewsMutation($title: title!, $teaser: teaser!, body: body!) {
-//         id
-//         title
-//         teaser
-//         body
-//         }
-//     }
-// `;
+const CREATE_NEWS = gql` mutation CREATE_NEWS ($title: String, $teaser: String, $body: String)
+     {
+        CreateNewsMutation(title: $title, teaser: $teaser, body: $body) {
+        id
+        title
+        teaser
+        body
+        }
+    }
+`;
 
 
 // const ADD_COMMENT = gql`
@@ -48,7 +48,7 @@ const GET_NEWS_BY_ID = gql` query GET_NEWS_BY_ID($id: String)
 //     }
 // `;
 
-export { GET_ALL_NEWS, GET_NEWS_BY_ID };
+export { GET_ALL_NEWS, GET_NEWS_BY_ID, CREATE_NEWS };
 
 // const STAR_REPOSITORY = gql`
 //   mutation($id: ID!) {

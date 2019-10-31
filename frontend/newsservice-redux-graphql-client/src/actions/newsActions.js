@@ -1,5 +1,5 @@
 import actionTypes from '../constants/actionTypes';
-import {GET_ALL_NEWS, GET_NEWS_BY_ID} from './newsServiceQLQueries'
+import {GET_ALL_NEWS, GET_NEWS_BY_ID, CREATE_NEWS} from './newsServiceQLQueries'
 import client from '../graphqlconfig/graphqlconfig' 
 
 function addComment(username, body){
@@ -56,16 +56,19 @@ export function fetchNewsItem(id){
 // }
 
 export function submitNewsStory(data){
+    console.log("submitNewsStory() data ", data)
+
+    const title = data.title
+    const teaser = data.teaser;
+    const body = data.body
     return dispatch => {
-        return fetch(`${process.env.REACT_APP_API_PROXY}/news`, { 
-            method: 'POST', 
-             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify(data), 
-            mode: 'cors'})
-            .catch( (e) => console.log(e) );
+        client.mutate({
+            mutation: CREATE_NEWS,
+            variables: {title, teaser, body}
+          }).then(data => {
+            dispatch(newsItemReceived(data.data.News))
+          }).catch(e => { console.log(e)
+          });
     }    
 }
 
