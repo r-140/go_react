@@ -1,11 +1,11 @@
 version: '3.6'
 services:
     newsservice-client:
-        container_name: newsservice-client
+        container_name: newsservice-redux-graphql-client
         build:
-            context: frontend/newsservice-client # Use an image built from the specified dockerfile in the `documents-app-client` directory.
+            context: frontend/newsservice-redux-graphql-client # Use an image built from the specified dockerfile in the `documents-app-client` directory.
             dockerfile: Dockerfile
-        image: newsservice-client:latest
+        image: newsservice-redux-graphql-client:latest
         ports:
         - "9090:80" # Forward the exposed port 80 on the container to port 80 on the host machine
         networks:
