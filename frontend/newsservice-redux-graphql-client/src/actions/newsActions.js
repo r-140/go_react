@@ -63,7 +63,6 @@ export function submitNewsStory(data){
             mutation: CREATE_NEWS,
             variables: {title, teaser, body}
           }).then(data => {
-              console.log("submitNewsStory received ", data.data.CreateNewsMutation)
             dispatch(newsItemReceived(data.data.CreateNewsMutation))
           }).catch(e => { console.log(e)
           });
@@ -78,7 +77,6 @@ export function submitComment(newsItemID, username, data){
                 mutation: ADD_COMMENT,
                 variables: {newsID: newsItemID, username, body}
               }).then(data => {
-                  console.log("submitComment body received ", data.data)
                 dispatch(addComment(data.data.AddCommentMutation.username, data.data.AddCommentMutation.body))
               }).catch(e => { console.log(e)
               });

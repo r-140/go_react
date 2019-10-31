@@ -19,6 +19,9 @@ export default (state = initialState, action) => {
     case constants.NEWSITEM_RECEIVED:
       updated['newsItem'] = action.newsItem;
       updated['newsItemLoading'] = false;
+      var updatedNews = Object.assign([], updated['news']);
+      updatedNews.push(action.newsItem);
+      updated['news'] = updatedNews;
       return updated;
 
     case constants.NEWSITEM_LOADING:

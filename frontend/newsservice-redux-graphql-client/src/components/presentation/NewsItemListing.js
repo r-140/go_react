@@ -14,7 +14,7 @@ class NewsItemListing extends Component {
 
 NewsItemListing.propTypes = {
     data: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         teaser: PropTypes.string.isRequired
 })
