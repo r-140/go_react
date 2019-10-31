@@ -129,7 +129,7 @@ func (mc *MongoClient) CreateNews(news model.News) (string, error) {
 }
 
 // CreateComment creates comments to database
-func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (string, error) {
+func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (model.Comment, error) {
 	log.Println("CreateComment(): comment ", comment)
 
 	news, err := mc.QueryNews(newsID)
@@ -166,7 +166,7 @@ func (mc *MongoClient) CreateComment(newsID string, comment model.Comment) (stri
 	}
 	log.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
 
-	return "comment has been created", err
+	return comment, err
 }
 
 func (mc *MongoClient) addNews(news *model.News) (string, error) {

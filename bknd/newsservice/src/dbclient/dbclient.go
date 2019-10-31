@@ -11,7 +11,7 @@ type IDbClient interface {
 	QueryAllNews() ([]model.News, error)
 	CreateNews(model.News) (string, error)
 	Check() bool
-	CreateComment(newsID string, comment model.Comment) (string, error)
+	CreateComment(newsID string, comment model.Comment) (model.Comment, error)
 }
 
 var DBClient IDbClient

@@ -78,8 +78,8 @@ export function submitComment(newsItemID, username, data){
                 mutation: ADD_COMMENT,
                 variables: {newsID: newsItemID, username, body}
               }).then(data => {
-                  console.log("submitComment data received ", data)
-                dispatch(addComment(username, data.body))
+                  console.log("submitComment body received ", data.data)
+                dispatch(addComment(data.data.AddCommentMutation.username, data.data.AddCommentMutation.body))
               }).catch(e => { console.log(e)
               });
         }    
