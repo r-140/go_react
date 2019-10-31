@@ -1,5 +1,5 @@
 import actionTypes from '../constants/actionTypes';
-import {GET_ALL_NEWS} from './newsServiceQLQueries'
+import {GET_ALL_NEWS, GET_NEWS_BY_ID} from './newsServiceQLQueries'
 import client from '../graphqlconfig/graphqlconfig' 
 
 function addComment(username, body){
@@ -39,10 +39,13 @@ export function fetchNews(){
 
 export function fetchNewsItem(id){
     return dispatch => {
-        return fetch(`${process.env.REACT_APP_API_PROXY}/news/${id}`)
-        .then( (response) => response.json() )
-        .then( (data) => dispatch(newsItemReceived(data)))
-        .catch( (e) => console.log(e) );
+        client.query({
+            query: GET_NEWS_BY_ID,
+            variables: {id},
+          }).then(data => {
+            dispatch(newsItemReceived(data.data.News))
+          }).catch(e => { console.log(e)
+          });
     }    
 }
 

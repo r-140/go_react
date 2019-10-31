@@ -9,10 +9,8 @@ class News extends Component {
     componentDidMount(){
         this.props.dispatch(fetchNews());
     }
-   
 
     render(){
-        console.log("news ", this.props)
         const newsItems = this.props.news.map( (news, i) => {
             return ( <li key={i}><NewsItemListing data = {news} /></li> );
         });
