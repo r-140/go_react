@@ -2,6 +2,8 @@
 
 this project demonstrates how to work with go, mongodb, graphql, and react+redux
 
+One service wiritten in Go produce content, other two (written in GO and Python) acts as a consumers. They communicates to each oher over grpc
+
 to run docker 
 
 1. build frontend:
